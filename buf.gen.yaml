@@ -1,10 +1,5 @@
 version: v2
 
-# Managed mode: buf сам проставит option go_package в каждом .proto,
-# чтобы не дублировать руками. Префикс собирается как:
-#   github.com/mao360/jobqueue-proto/gen/go + относительный путь файла
-# то есть для proto/jobqueue/v1/job.proto получится
-#   github.com/mao360/jobqueue-proto/gen/go/jobqueue/v1
 managed:
   enabled: true
   override:
@@ -12,21 +7,11 @@ managed:
       value: github.com/mao360/jobqueue-proto/gen/go
 
 plugins:
-  # protoc-gen-go: основной плагин — генерит структуры из message,
-  # константы из enum, и сериализацию (Marshal/Unmarshal).
-  # Это ядро, без него остальное не работает.
   - local: protoc-gen-go
     out: gen/go
     opt:
-      # paths=source_relative: класть .pb.go рядом по структуре, как в proto/.
-      # Альтернатива (без этой опции) — раскладывать по go_package, что
-      # создаёт лишний уровень вложенности и ломает удобство навигации.
       - paths=source_relative
 
-  # protoc-gen-connect-go: добавляет Connect/gRPC handler-ы и client-ы
-  # рядом с обычным .pb.go. Файлы будут называться *.connect.go.
-  # Без этого плагина у тебя были бы только структуры, но не было бы
-  # серверного интерфейса и клиентского stub'а для RPC.
   - local: protoc-gen-connect-go
     out: gen/go
     opt:

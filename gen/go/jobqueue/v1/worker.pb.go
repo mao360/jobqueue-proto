@@ -21,9 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ConnectRequest — то, что воркер шлёт scheduler'у через bidi-стрим.
-// Имя следует канону: <MethodName>Request для rpc Connect.
-// Семантика "от кого" — в имени oneof-вариантов (hello/job_accepted/...).
 type ConnectRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Message:
@@ -154,7 +151,6 @@ func (*ConnectRequest_JobResult) isConnectRequest_Message() {}
 
 func (*ConnectRequest_Heartbeat) isConnectRequest_Message() {}
 
-// ConnectResponse — то, что scheduler шлёт воркеру в том же bidi-стриме.
 type ConnectResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Message:

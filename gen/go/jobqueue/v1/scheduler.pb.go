@@ -381,11 +381,6 @@ func (*CancelJobResponse) Descriptor() ([]byte, []int) {
 	return file_jobqueue_v1_scheduler_proto_rawDescGZIP(), []int{7}
 }
 
-// SubmitBatchRequest — обёртка вокруг CreateJobRequest.
-// Каждый элемент в стриме — это "запрос на создание одной задачи",
-// но мы оборачиваем по канону: у каждого rpc свой именованный Request,
-// чтобы потом можно было добавить поля специфичные для batch (priority, tag, ...)
-// без слома контракта CreateJob.
 type SubmitBatchRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Job           *CreateJobRequest      `protobuf:"bytes,1,opt,name=job,proto3" json:"job,omitempty"`
