@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package jobqueue.v1;
+
+import "jobqueue/v1/job.proto";
+
+message CreateJobRequest {
+  string task_type = 1;
+  bytes payload = 2;
+  int32 timeout_seconds = 3;
+}
+
+message CreateJobResponse {
+  Job job = 1;
+}
+
+message GetJobRequest {
+  string job_id = 1;
+}
+
+message GetJobResponse {
+  Job job = 1;
+}
+
+message WatchJobRequest {
+  string job_id = 1;
+}
+
+message WatchJobResponse {
+  JobEvent event = 1;
+}
+
+message CancelJobRequest {
+  string job_id = 1;
+}
+
+message CancelJobResponse {}
+
+message SubmitBatchRequest {
+  CreateJobRequest job = 1;
+}
+
+message SubmitBatchResponse {
+  repeated Job jobs = 1;
+  int32 accepted_count = 2;
+  int32 rejected_count = 3;
+}
+
+service SchedulerService {
+  rpc CreateJob(CreateJobRequest) returns (CreateJobResponse);
+  rpc GetJob(GetJobRequest) returns (GetJobResponse);
+  rpc WatchJob(WatchJobRequest) returns (stream WatchJobResponse);
+  rpc CancelJob(CancelJobRequest) returns (CancelJobResponse);
+  rpc SubmitBatch(stream SubmitBatchRequest) returns (SubmitBatchResponse);
+}

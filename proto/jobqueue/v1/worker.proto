@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package jobqueue.v1;
+
+import "jobqueue/v1/job.proto";
+
+message ConnectRequest {
+  oneof message {
+    WorkerHello hello = 1;
+    JobAccepted job_accepted = 2;
+    JobEvent job_event = 3;
+    JobResult job_result = 4;
+    WorkerHeartbeat heartbeat = 5;
+  }
+}
+
+message ConnectResponse {
+  oneof message {
+    SchedulerWelcome welcome = 1;
+    JobAssignment job_assignment = 2;
+    CancelJobInstruction cancel = 3;
+    SchedulerHeartbeat heartbeat = 4;
+  }
+}
+
+message WorkerHello {
+  string worker_id = 1;
+  repeated string supported_task_types = 2;
+  int32 max_concurrent_jobs = 3;
+}
+
+message SchedulerWelcome {
+  string assigned_worker_id = 1;
+}
+
+message JobAssignment {
+  Job job = 1;
+}
+
+message JobAccepted {
+  string job_id = 1;
+}
+
+message JobResult {
+  string job_id = 1;
+  JobStatus final_status = 2;
+  bytes result = 3;
+  string error = 4;
+}
+
+message CancelJobInstruction {
+  string job_id = 1;
+}
+
+message WorkerHeartbeat {
+  int32 active_jobs = 1;
+}
+
+message SchedulerHeartbeat {}
+
+service WorkerGatewayService {
+  rpc Connect(stream ConnectRequest) returns (stream ConnectResponse);
+}

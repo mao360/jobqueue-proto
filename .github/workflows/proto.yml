@@ -1,0 +1,42 @@
+name: proto
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - uses: bufbuild/buf-setup-action@v1
+
+      - name: Install Go plugins
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
+
+      - name: buf lint
+        run: buf lint
+
+      - name: buf breaking (PR only)
+        if: github.event_name == 'pull_request'
+        uses: bufbuild/buf-breaking-action@v1
+        with:
+          against: 'https://github.com/${{ github.repository }}.git#branch=${{ github.base_ref }}'
+
+      - name: Verify generated code is up-to-date
+        run: |
+          buf generate
+          git diff --exit-code -- gen/
+
+      - name: go build
+        run: go build ./...
