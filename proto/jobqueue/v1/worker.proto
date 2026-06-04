@@ -2,10 +2,12 @@ syntax = "proto3";
 
 package jobqueue.v1;
 
+import "buf/validate/validate.proto";
 import "jobqueue/v1/job.proto";
 
 message ConnectRequest {
   oneof message {
+    option (buf.validate.oneof).required = true;
     WorkerHello hello = 1;
     JobAccepted job_accepted = 2;
     JobEvent job_event = 3;
@@ -24,9 +26,12 @@ message ConnectResponse {
 }
 
 message WorkerHello {
-  string worker_id = 1;
-  repeated string supported_task_types = 2;
-  int32 max_concurrent_jobs = 3;
+  string worker_id = 1 [(buf.validate.field).string.min_len = 1];
+  repeated string supported_task_types = 2 [(buf.validate.field).repeated = {
+    min_items: 1,
+    items: {string: {min_len: 1}}
+  }];
+  int32 max_concurrent_jobs = 3 [(buf.validate.field).int32.gte = 1];
 }
 
 message SchedulerWelcome {
@@ -38,12 +43,15 @@ message JobAssignment {
 }
 
 message JobAccepted {
-  string job_id = 1;
+  string job_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message JobResult {
-  string job_id = 1;
-  JobStatus final_status = 2;
+  string job_id = 1 [(buf.validate.field).string.min_len = 1];
+  JobStatus final_status = 2 [(buf.validate.field).enum = {
+    defined_only: true,
+    not_in: [0]
+  }];
   bytes result = 3;
   string error = 4;
 }
@@ -53,7 +61,7 @@ message CancelJobInstruction {
 }
 
 message WorkerHeartbeat {
-  int32 active_jobs = 1;
+  int32 active_jobs = 1 [(buf.validate.field).int32.gte = 0];
 }
 
 message SchedulerHeartbeat {}

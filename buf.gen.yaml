@@ -1,10 +1,22 @@
 version: v2
 
+# Вендоренные сторонние протоконтракты (third_party/buf/validate) нужны только
+# для компиляции опций в дескрипторы — Go для них не генерим: их типы даёт
+# protovalidate-go в рантайме, дубль привёл бы к panic на регистрации файла.
+inputs:
+  - directory: proto
+
 managed:
   enabled: true
   override:
     - file_option: go_package_prefix
       value: github.com/mao360/jobqueue-proto/gen/go
+  # Вендоренный validate.proto должен сохранить апстримный go_package, иначе
+  # blank-import в наших *.pb.go укажет на негенерируемый пакет. Так импорт
+  # ведёт на тот же модуль, что тянет protovalidate-go в рантайме.
+  disable:
+    - file_option: go_package
+      path: buf/validate/validate.proto
 
 plugins:
   - local: protoc-gen-go

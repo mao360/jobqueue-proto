@@ -2,12 +2,13 @@ syntax = "proto3";
 
 package jobqueue.v1;
 
+import "buf/validate/validate.proto";
 import "jobqueue/v1/job.proto";
 
 message CreateJobRequest {
-  string task_type = 1;
-  bytes payload = 2;
-  int32 timeout_seconds = 3;
+  string task_type = 1 [(buf.validate.field).string = {min_len: 1, max_len: 128}];
+  bytes payload = 2 [(buf.validate.field).bytes.max_len = 1048576];
+  int32 timeout_seconds = 3 [(buf.validate.field).int32 = {gte: 0, lte: 86400}];
 }
 
 message CreateJobResponse {
@@ -15,7 +16,7 @@ message CreateJobResponse {
 }
 
 message GetJobRequest {
-  string job_id = 1;
+  string job_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message GetJobResponse {
@@ -23,7 +24,7 @@ message GetJobResponse {
 }
 
 message WatchJobRequest {
-  string job_id = 1;
+  string job_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message WatchJobResponse {
@@ -31,13 +32,13 @@ message WatchJobResponse {
 }
 
 message CancelJobRequest {
-  string job_id = 1;
+  string job_id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message CancelJobResponse {}
 
 message SubmitBatchRequest {
-  CreateJobRequest job = 1;
+  CreateJobRequest job = 1 [(buf.validate.field).required = true];
 }
 
 message SubmitBatchResponse {

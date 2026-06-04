@@ -7,6 +7,7 @@
 package jobqueuev1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -653,40 +654,41 @@ var File_jobqueue_v1_worker_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_worker_proto_rawDesc = "" +
 	"\n" +
-	"\x18jobqueue/v1/worker.proto\x12\vjobqueue.v1\x1a\x15jobqueue/v1/job.proto\"\xb9\x02\n" +
+	"\x18jobqueue/v1/worker.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x15jobqueue/v1/job.proto\"\xc0\x02\n" +
 	"\x0eConnectRequest\x120\n" +
 	"\x05hello\x18\x01 \x01(\v2\x18.jobqueue.v1.WorkerHelloH\x00R\x05hello\x12=\n" +
 	"\fjob_accepted\x18\x02 \x01(\v2\x18.jobqueue.v1.JobAcceptedH\x00R\vjobAccepted\x124\n" +
 	"\tjob_event\x18\x03 \x01(\v2\x15.jobqueue.v1.JobEventH\x00R\bjobEvent\x127\n" +
 	"\n" +
 	"job_result\x18\x04 \x01(\v2\x16.jobqueue.v1.JobResultH\x00R\tjobResult\x12<\n" +
-	"\theartbeat\x18\x05 \x01(\v2\x1c.jobqueue.v1.WorkerHeartbeatH\x00R\theartbeatB\t\n" +
-	"\amessage\"\x9a\x02\n" +
+	"\theartbeat\x18\x05 \x01(\v2\x1c.jobqueue.v1.WorkerHeartbeatH\x00R\theartbeatB\x10\n" +
+	"\amessage\x12\x05\xbaH\x02\b\x01\"\x9a\x02\n" +
 	"\x0fConnectResponse\x129\n" +
 	"\awelcome\x18\x01 \x01(\v2\x1d.jobqueue.v1.SchedulerWelcomeH\x00R\awelcome\x12C\n" +
 	"\x0ejob_assignment\x18\x02 \x01(\v2\x1a.jobqueue.v1.JobAssignmentH\x00R\rjobAssignment\x12;\n" +
 	"\x06cancel\x18\x03 \x01(\v2!.jobqueue.v1.CancelJobInstructionH\x00R\x06cancel\x12?\n" +
 	"\theartbeat\x18\x04 \x01(\v2\x1f.jobqueue.v1.SchedulerHeartbeatH\x00R\theartbeatB\t\n" +
-	"\amessage\"\x8c\x01\n" +
-	"\vWorkerHello\x12\x1b\n" +
-	"\tworker_id\x18\x01 \x01(\tR\bworkerId\x120\n" +
-	"\x14supported_task_types\x18\x02 \x03(\tR\x12supportedTaskTypes\x12.\n" +
-	"\x13max_concurrent_jobs\x18\x03 \x01(\x05R\x11maxConcurrentJobs\"@\n" +
+	"\amessage\"\xae\x01\n" +
+	"\vWorkerHello\x12$\n" +
+	"\tworker_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\bworkerId\x12@\n" +
+	"\x14supported_task_types\x18\x02 \x03(\tB\x0e\xbaH\v\x92\x01\b\b\x01\"\x04r\x02\x10\x01R\x12supportedTaskTypes\x127\n" +
+	"\x13max_concurrent_jobs\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02(\x01R\x11maxConcurrentJobs\"@\n" +
 	"\x10SchedulerWelcome\x12,\n" +
 	"\x12assigned_worker_id\x18\x01 \x01(\tR\x10assignedWorkerId\"3\n" +
 	"\rJobAssignment\x12\"\n" +
-	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"$\n" +
-	"\vJobAccepted\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"\x8b\x01\n" +
-	"\tJobResult\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x129\n" +
-	"\ffinal_status\x18\x02 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\vfinalStatus\x12\x16\n" +
+	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"-\n" +
+	"\vJobAccepted\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\"\xa0\x01\n" +
+	"\tJobResult\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\x12E\n" +
+	"\ffinal_status\x18\x02 \x01(\x0e2\x16.jobqueue.v1.JobStatusB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\vfinalStatus\x12\x16\n" +
 	"\x06result\x18\x03 \x01(\fR\x06result\x12\x14\n" +
 	"\x05error\x18\x04 \x01(\tR\x05error\"-\n" +
 	"\x14CancelJobInstruction\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"2\n" +
-	"\x0fWorkerHeartbeat\x12\x1f\n" +
-	"\vactive_jobs\x18\x01 \x01(\x05R\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\";\n" +
+	"\x0fWorkerHeartbeat\x12(\n" +
+	"\vactive_jobs\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02(\x00R\n" +
 	"activeJobs\"\x14\n" +
 	"\x12SchedulerHeartbeat2`\n" +
 	"\x14WorkerGatewayService\x12H\n" +

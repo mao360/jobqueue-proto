@@ -7,6 +7,7 @@
 package jobqueuev1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -489,26 +490,27 @@ var File_jobqueue_v1_scheduler_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_scheduler_proto_rawDesc = "" +
 	"\n" +
-	"\x1bjobqueue/v1/scheduler.proto\x12\vjobqueue.v1\x1a\x15jobqueue/v1/job.proto\"r\n" +
-	"\x10CreateJobRequest\x12\x1b\n" +
-	"\ttask_type\x18\x01 \x01(\tR\btaskType\x12\x18\n" +
-	"\apayload\x18\x02 \x01(\fR\apayload\x12'\n" +
-	"\x0ftimeout_seconds\x18\x03 \x01(\x05R\x0etimeoutSeconds\"7\n" +
+	"\x1bjobqueue/v1/scheduler.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x15jobqueue/v1/job.proto\"\x96\x01\n" +
+	"\x10CreateJobRequest\x12'\n" +
+	"\ttask_type\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\x01R\btaskType\x12#\n" +
+	"\apayload\x18\x02 \x01(\fB\t\xbaH\x06z\x04\x18\x80\x80@R\apayload\x124\n" +
+	"\x0ftimeout_seconds\x18\x03 \x01(\x05B\v\xbaH\b\x1a\x06\x18\x80\xa3\x05(\x00R\x0etimeoutSeconds\"7\n" +
 	"\x11CreateJobResponse\x12\"\n" +
-	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"&\n" +
-	"\rGetJobRequest\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"4\n" +
+	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"/\n" +
+	"\rGetJobRequest\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\"4\n" +
 	"\x0eGetJobResponse\x12\"\n" +
-	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"(\n" +
-	"\x0fWatchJobRequest\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"?\n" +
+	"\x03job\x18\x01 \x01(\v2\x10.jobqueue.v1.JobR\x03job\"1\n" +
+	"\x0fWatchJobRequest\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\"?\n" +
 	"\x10WatchJobResponse\x12+\n" +
-	"\x05event\x18\x01 \x01(\v2\x15.jobqueue.v1.JobEventR\x05event\")\n" +
-	"\x10CancelJobRequest\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"\x13\n" +
-	"\x11CancelJobResponse\"E\n" +
-	"\x12SubmitBatchRequest\x12/\n" +
-	"\x03job\x18\x01 \x01(\v2\x1d.jobqueue.v1.CreateJobRequestR\x03job\"\x89\x01\n" +
+	"\x05event\x18\x01 \x01(\v2\x15.jobqueue.v1.JobEventR\x05event\"2\n" +
+	"\x10CancelJobRequest\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\"\x13\n" +
+	"\x11CancelJobResponse\"M\n" +
+	"\x12SubmitBatchRequest\x127\n" +
+	"\x03job\x18\x01 \x01(\v2\x1d.jobqueue.v1.CreateJobRequestB\x06\xbaH\x03\xc8\x01\x01R\x03job\"\x89\x01\n" +
 	"\x13SubmitBatchResponse\x12$\n" +
 	"\x04jobs\x18\x01 \x03(\v2\x10.jobqueue.v1.JobR\x04jobs\x12%\n" +
 	"\x0eaccepted_count\x18\x02 \x01(\x05R\racceptedCount\x12%\n" +

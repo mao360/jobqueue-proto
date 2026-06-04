@@ -7,6 +7,7 @@
 package jobqueuev1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -470,7 +471,7 @@ var File_jobqueue_v1_job_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
+	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
 	"\x03Job\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12\x18\n" +
@@ -491,14 +492,14 @@ const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"\n" +
 	"old_status\x18\x01 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\toldStatus\x125\n" +
 	"\n" +
-	"new_status\x18\x02 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\tnewStatus\"A\n" +
-	"\vJobProgress\x12\x18\n" +
-	"\apercent\x18\x01 \x01(\x05R\apercent\x12\x18\n" +
+	"new_status\x18\x02 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\tnewStatus\"L\n" +
+	"\vJobProgress\x12#\n" +
+	"\apercent\x18\x01 \x01(\x05B\t\xbaH\x06\x1a\x04\x18d(\x00R\apercent\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x1c\n" +
 	"\x06JobLog\x12\x12\n" +
-	"\x04line\x18\x01 \x01(\tR\x04line\"\xff\x01\n" +
-	"\bJobEvent\x12\x15\n" +
-	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12*\n" +
+	"\x04line\x18\x01 \x01(\tR\x04line\"\x88\x02\n" +
+	"\bJobEvent\x12\x1e\n" +
+	"\x06job_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05jobId\x12*\n" +
 	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x12F\n" +
 	"\x0estatus_changed\x18\x03 \x01(\v2\x1d.jobqueue.v1.JobStatusChangedH\x00R\rstatusChanged\x126\n" +
 	"\bprogress\x18\x04 \x01(\v2\x18.jobqueue.v1.JobProgressH\x00R\bprogress\x12'\n" +
