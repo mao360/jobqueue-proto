@@ -82,9 +82,10 @@ func (JobStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type Job struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	TaskType         string                 `protobuf:"bytes,2,opt,name=task_type,json=taskType,proto3" json:"task_type,omitempty"`
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Id       string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	TaskType string                 `protobuf:"bytes,2,opt,name=task_type,json=taskType,proto3" json:"task_type,omitempty"`
+	// Deprecated: Marked as deprecated in jobqueue/v1/job.proto.
 	Payload          []byte                 `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
 	Status           JobStatus              `protobuf:"varint,4,opt,name=status,proto3,enum=jobqueue.v1.JobStatus" json:"status,omitempty"`
 	TimeoutSeconds   int32                  `protobuf:"varint,5,opt,name=timeout_seconds,json=timeoutSeconds,proto3" json:"timeout_seconds,omitempty"`
@@ -94,6 +95,7 @@ type Job struct {
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	StartedAt        *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	FinishedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
+	PayloadV2        []byte                 `protobuf:"bytes,12,opt,name=payload_v2,json=payloadV2,proto3" json:"payload_v2,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -142,6 +144,7 @@ func (x *Job) GetTaskType() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in jobqueue/v1/job.proto.
 func (x *Job) GetPayload() []byte {
 	if x != nil {
 		return x.Payload
@@ -201,6 +204,13 @@ func (x *Job) GetStartedAt() *timestamppb.Timestamp {
 func (x *Job) GetFinishedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.FinishedAt
+	}
+	return nil
+}
+
+func (x *Job) GetPayloadV2() []byte {
+	if x != nil {
+		return x.PayloadV2
 	}
 	return nil
 }
@@ -471,11 +481,11 @@ var File_jobqueue_v1_job_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
+	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd7\x03\n" +
 	"\x03Job\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12\x18\n" +
-	"\apayload\x18\x03 \x01(\fR\apayload\x12.\n" +
+	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12\x1c\n" +
+	"\apayload\x18\x03 \x01(\fB\x02\x18\x01R\apayload\x12.\n" +
 	"\x06status\x18\x04 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\x06status\x12'\n" +
 	"\x0ftimeout_seconds\x18\x05 \x01(\x05R\x0etimeoutSeconds\x12\x16\n" +
 	"\x06result\x18\x06 \x01(\fR\x06result\x12\x14\n" +
@@ -487,7 +497,9 @@ const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"started_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12;\n" +
 	"\vfinished_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"finishedAt\"\x80\x01\n" +
+	"finishedAt\x12\x1d\n" +
+	"\n" +
+	"payload_v2\x18\f \x01(\fR\tpayloadV2\"\x80\x01\n" +
 	"\x10JobStatusChanged\x125\n" +
 	"\n" +
 	"old_status\x18\x01 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\toldStatus\x125\n" +
