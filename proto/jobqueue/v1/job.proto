@@ -15,10 +15,9 @@ enum JobStatus {
 }
 
 message Job {
-  reserved 3;
-  reserved "payload";
   string id = 1;
   string task_type = 2;
+  bytes payload = 3 [deprecated = true];
   JobStatus status = 4;
   int32 timeout_seconds = 5;
   bytes result = 6;
@@ -27,6 +26,7 @@ message Job {
   google.protobuf.Timestamp created_at = 9;
   google.protobuf.Timestamp started_at = 10;
   google.protobuf.Timestamp finished_at = 11;
+  bytes payload_v2 = 12;
 }
 
 message JobStatusChanged {
