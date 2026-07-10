@@ -17,7 +17,6 @@ enum JobStatus {
 message Job {
   string id = 1;
   string task_type = 2;
-  bytes payload = 3;
   JobStatus status = 4;
   int32 timeout_seconds = 5;
   bytes result = 6;

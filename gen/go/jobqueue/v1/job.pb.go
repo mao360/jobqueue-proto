@@ -85,7 +85,6 @@ type Job struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	TaskType         string                 `protobuf:"bytes,2,opt,name=task_type,json=taskType,proto3" json:"task_type,omitempty"`
-	Payload          []byte                 `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
 	Status           JobStatus              `protobuf:"varint,4,opt,name=status,proto3,enum=jobqueue.v1.JobStatus" json:"status,omitempty"`
 	TimeoutSeconds   int32                  `protobuf:"varint,5,opt,name=timeout_seconds,json=timeoutSeconds,proto3" json:"timeout_seconds,omitempty"`
 	Result           []byte                 `protobuf:"bytes,6,opt,name=result,proto3" json:"result,omitempty"`
@@ -140,13 +139,6 @@ func (x *Job) GetTaskType() string {
 		return x.TaskType
 	}
 	return ""
-}
-
-func (x *Job) GetPayload() []byte {
-	if x != nil {
-		return x.Payload
-	}
-	return nil
 }
 
 func (x *Job) GetStatus() JobStatus {
@@ -471,11 +463,10 @@ var File_jobqueue_v1_job_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
+	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x03\n" +
 	"\x03Job\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12\x18\n" +
-	"\apayload\x18\x03 \x01(\fR\apayload\x12.\n" +
+	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12.\n" +
 	"\x06status\x18\x04 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\x06status\x12'\n" +
 	"\x0ftimeout_seconds\x18\x05 \x01(\x05R\x0etimeoutSeconds\x12\x16\n" +
 	"\x06result\x18\x06 \x01(\fR\x06result\x12\x14\n" +
