@@ -463,7 +463,7 @@ var File_jobqueue_v1_job_proto protoreflect.FileDescriptor
 
 const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x03\n" +
+	"\x15jobqueue/v1/job.proto\x12\vjobqueue.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa9\x03\n" +
 	"\x03Job\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\ttask_type\x18\x02 \x01(\tR\btaskType\x12.\n" +
@@ -478,7 +478,7 @@ const file_jobqueue_v1_job_proto_rawDesc = "" +
 	"started_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12;\n" +
 	"\vfinished_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"finishedAt\"\x80\x01\n" +
+	"finishedAtJ\x04\b\x03\x10\x04R\apayload\"\x80\x01\n" +
 	"\x10JobStatusChanged\x125\n" +
 	"\n" +
 	"old_status\x18\x01 \x01(\x0e2\x16.jobqueue.v1.JobStatusR\toldStatus\x125\n" +
